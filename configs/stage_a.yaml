@@ -1,0 +1,41 @@
+policy:
+  obs_horizon: 4
+  action_horizon: 8
+  action_dim: 8
+  n_action_steps: 4
+  control_dt: 0.3
+  image_size: [96, 96]
+  crop_size: [84, 84]
+  vision_weights: null
+  vision_group_norm: true
+  share_vision_backbone: false
+  share_tactile_backbone: false
+  imagenet_norm: true
+  token_dim: 256
+  condition_dim: 256
+  num_diffusion_steps: 100
+  num_inference_steps: 100
+data:
+  frame_stride: 3
+  val_fraction: 0.2
+  require_sync_valid: true
+training:
+  stage: a
+  epochs: 100
+  batch_size: 16
+  num_workers: 0
+  learning_rate: 0.0001
+  weight_decay: 0.001
+  warmup_steps: 100
+  gradient_clip_norm: 1.0
+  freeze_encoders: false
+  seed: 42
+  device: cpu
+  cpu_threads: 4
+loss:
+  min_keep_prob: 0.35
+  max_keep_prob: 0.95
+  target_gate_mean: 0.65
+  lambda_budget: 0.1
+  lambda_smooth: 0.02
+  lambda_tactile_symmetry: 0.0
